@@ -13,6 +13,9 @@ import { RootStateType } from './Redux/state';
 type appPropsType={
   state:RootStateType
   addPost:(postMessage:string)=>void
+  addMassage:()=>void
+  updateNewMessageText:(newText:string)=>void
+  updateNewPostText:(newText:string)=>void
 }
 
 
@@ -23,8 +26,14 @@ const App = (props:appPropsType) => {
         <Header />
         <Nav />
         <div className='app-wrapper-content'>
-          <Route path='/profile' render={()=><Profile state={props.state.profilePage} addPost={props.addPost}/>} />
-          <Route path='/dialogs' render={()=><Dialogs state={props.state.dialogsPage}/>} />
+          <Route path='/profile' render={()=><Profile 
+                                               state={props.state.profilePage}
+                                               addPost={props.addPost}
+                                               updateNewPostText={props.updateNewPostText}/>} />
+          <Route path='/dialogs' render={()=><Dialogs 
+                                               dialogsPage={props.state.dialogsPage}
+                                               addMassage={props.addMassage}
+                                               updateNewMessageText={props.updateNewMessageText}/>} />
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
           <Route path='/setting' component={Setting} />

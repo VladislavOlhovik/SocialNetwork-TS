@@ -6,23 +6,27 @@ import { ProfilePageType } from '../../../Redux/state';
 type myPostPropsType={
   postdata:ProfilePageType
   addPost:(postMessage:string)=>void
+  updateNewPostText:(newText:string)=>void
 }
 
 export const MyPost = (props:myPostPropsType) => {
   const newPostElement=React.createRef<HTMLTextAreaElement>()
   const addPost=()=>{
     if(newPostElement.current){
-    const text= newPostElement.current.value
-    props.addPost(text)
-    newPostElement.current.value=''
+    props.addPost(newPostElement.current.value)
     }
   }
+  const onPostChange=()=>{
+    if(newPostElement.current){
+      props.updateNewPostText(newPostElement.current.value)
+  }
+}
    return (
     <div className={s.postsBlock}>
       <h3>My post</h3>
       <div>
         <div>
-          <textarea ref={newPostElement}></textarea>
+          <textarea ref={newPostElement} onChange={onPostChange} value={props.postdata.newPostText}></textarea>
         </div>
         <div>
           <button onClick={addPost}>Add post</button>
