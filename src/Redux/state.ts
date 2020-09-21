@@ -1,4 +1,6 @@
-import { rerenderEntireTree } from "../render"
+let rerenderEntireTree=()=>{
+
+}
 
 export type MessagesDataType = {
     id?: number
@@ -59,18 +61,18 @@ let state: RootStateType = {
 }
 export const updateNewMessageText=(newtext:string)=>{
     state.dialogsPage.newMessage=newtext
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 export const addMassage=()=>{
     const newMassage={id:6, message:state.dialogsPage.newMessage}
     state.dialogsPage.messagesData.push(newMassage)
     state.dialogsPage.newMessage=''
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 
 export const updateNewPostText=(newtext:string)=>{
     state.profilePage.newPostText=newtext
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 }
 export const addPost=(postMessage:string)=>{
     const newPost:PostDataType={
@@ -80,7 +82,10 @@ export const addPost=(postMessage:string)=>{
     }
     state.profilePage.postData.push(newPost)
     state.profilePage.newPostText=''
-    rerenderEntireTree(state)
+    rerenderEntireTree()
+}
+export const subscribe=(observer:() => void)=>{
+    rerenderEntireTree=observer
 }
 
 export default state
