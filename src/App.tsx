@@ -12,7 +12,7 @@ import { RootStateType } from './Redux/state';
 
 type appPropsType={
   state:RootStateType
-  addPost:(postMessage:string)=>void
+  addPost:()=>void
   addMassage:()=>void
   updateNewMessageText:(newText:string)=>void
   updateNewPostText:(newText:string)=>void

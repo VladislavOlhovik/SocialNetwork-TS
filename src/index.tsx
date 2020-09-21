@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import state, { addMassage, addPost, RootStateType, subscribe, updateNewMessageText, updateNewPostText } from './Redux/state';
+import state, { addMassage, addPost, subscribe, updateNewMessageText, updateNewPostText } from './Redux/state';
 
 const rerenderEntireTree=()=>{
 ReactDOM.render(

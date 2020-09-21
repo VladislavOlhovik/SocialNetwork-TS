@@ -1,7 +1,4 @@
-let rerenderEntireTree=()=>{
-
-}
-
+let rerenderEntireTree=()=>{}
 export type MessagesDataType = {
     id?: number
     message: string
@@ -52,9 +49,7 @@ let state: RootStateType = {
         messagesData: [
             { id: 1, message: 'Hi' },
             { id: 2, message: 'How is your it-kamasutra' },
-            { id: 3, message: 'Yo' },
-            { id: 4, message: 'Yo' },
-            { id: 5, message: 'Yo' }
+            { id: 3, message: 'Yo' }
         ]
     },
     sidebar: {}
@@ -74,10 +69,10 @@ export const updateNewPostText=(newtext:string)=>{
     state.profilePage.newPostText=newtext
     rerenderEntireTree()
 }
-export const addPost=(postMessage:string)=>{
+export const addPost=()=>{
     const newPost:PostDataType={
         id:5,
-        message:postMessage,
+        message:state.profilePage.newPostText,
         likeCounts:0    
     }
     state.profilePage.postData.push(newPost)
