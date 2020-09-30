@@ -1,20 +1,20 @@
 import React, { ChangeEvent } from 'react';
 import s from './MyPost.module.css';
 import { Post } from './Post/Post';
-import { ProfilePageType } from '../../../Redux/state';
+import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../Redux/profile-reducer';
+import { ActionTypes, ProfilePageType } from '../../../Redux/state';
 
 type myPostPropsType={
   postdata:ProfilePageType
-  addPost:()=>void
-  updateNewPostText:(newText:string)=>void
+  dispatch:(action:ActionTypes)=>void
 }
 
 export const MyPost = (props:myPostPropsType) => {
   const addPost=()=>{
-    props.addPost()
+    props.dispatch(addPostActionCreator(''))
   }
   const onPostChange=(e:ChangeEvent<HTMLTextAreaElement>)=>{
-      props.updateNewPostText(e.currentTarget.value)
+      props.dispatch(updateNewPostTextActionCreator(e.currentTarget.value))
 }
    return (
     <div className={s.postsBlock}>

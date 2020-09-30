@@ -8,14 +8,10 @@ import Dialogs from './components/Dialogs/Dialogs';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Setting from './components/Setting/Setting';
-import { RootStateType } from './Redux/state';
+import { StoreType } from './Redux/state';
 
 type appPropsType={
-  state:RootStateType
-  addPost:()=>void
-  addMassage:()=>void
-  updateNewMessageText:(newText:string)=>void
-  updateNewPostText:(newText:string)=>void
+  store: StoreType
 }
 
 
@@ -27,13 +23,9 @@ const App = (props:appPropsType) => {
         <Nav />
         <div className='app-wrapper-content'>
           <Route path='/profile' render={()=><Profile 
-                                               state={props.state.profilePage}
-                                               addPost={props.addPost}
-                                               updateNewPostText={props.updateNewPostText}/>} />
-          <Route path='/dialogs' render={()=><Dialogs 
-                                               dialogsPage={props.state.dialogsPage}
-                                               addMassage={props.addMassage}
-                                               updateNewMessageText={props.updateNewMessageText}/>} />
+                                               state={props.store.getState().profilePage}
+                                               dispatch={props.store.dispatch.bind(props.store)}/>} />
+          <Route path='/dialogs' render={()=><Dialogs store={props.store}/>} />
           <Route path='/news' component={News} />
           <Route path='/music' component={Music} />
           <Route path='/setting' component={Setting} />
