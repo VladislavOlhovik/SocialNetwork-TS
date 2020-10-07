@@ -1,5 +1,6 @@
 import dialogsReducer, { addMessageActionCreator, updateNewMessageActionCreator } from "./dialogs-reducer"
 import profileReducer, { addPostActionCreator, updateNewPostTextActionCreator } from "./profile-reducer"
+import sidebarReducer from "./sidebar-reducer"
 
 export type MessagesDataType = {
     id?: number
@@ -77,6 +78,7 @@ let store:StoreType ={
     dispatch(action){
         this._state.dialogsPage=dialogsReducer(this._state.dialogsPage,action)
         this._state.profilePage=profileReducer(this._state.profilePage,action)
+        this._state.sidebar=sidebarReducer(this._state.sidebar,action)
 
         this.rerenderEntireTree()
     }

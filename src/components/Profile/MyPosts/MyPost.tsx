@@ -1,34 +1,35 @@
 import React, { ChangeEvent } from 'react';
 import s from './MyPost.module.css';
 import { Post } from './Post/Post';
-import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../Redux/profile-reducer';
-import { ActionTypes, ProfilePageType } from '../../../Redux/state';
+import { PostDataType } from '../../../Redux/store';
 
 type myPostPropsType={
-  postdata:ProfilePageType
-  dispatch:(action:ActionTypes)=>void
+  postdata:Array<PostDataType>
+  newPostText:string
+  updateNewPostText:(e:string)=>void
+  addPost:()=>void
 }
 
 export const MyPost = (props:myPostPropsType) => {
   const addPost=()=>{
-    props.dispatch(addPostActionCreator(''))
+    props.addPost()
   }
   const onPostChange=(e:ChangeEvent<HTMLTextAreaElement>)=>{
-      props.dispatch(updateNewPostTextActionCreator(e.currentTarget.value))
+      props.updateNewPostText(e.currentTarget.value)
 }
    return (
     <div className={s.postsBlock}>
       <h3>My post</h3>
       <div>
         <div>
-          <textarea onChange={onPostChange} value={props.postdata.newPostText}></textarea>
+          <textarea onChange={onPostChange} value={props.newPostText}></textarea>
         </div>
         <div>
           <button onClick={addPost}>Add post</button>
         </div>
       </div>
       <div className={s.posts}>
-        {props.postdata.postData.map(el=><Post message={el.message} likeCounts={el.likeCounts} />)}
+        {props.postdata.map(el=><Post message={el.message} likeCounts={el.likeCounts} />)}
       </div>
     </div >
   )
