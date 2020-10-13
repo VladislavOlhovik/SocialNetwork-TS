@@ -1,31 +1,33 @@
+import { v1 } from "uuid"
 import { ActionTypes, DialogsPageType } from "./store"
 
 const initialState:DialogsPageType = {
     dialogsData: [
-        { id: 1, name: 'Dimych' },
-        { id: 2, name: 'Andrey' },
-        { id: 3, name: 'Sveta' },
-        { id: 4, name: 'Sasha' },
-        { id: 5, name: 'Viktor' },
-        { id: 6, name: 'Valera' },
+        { id: v1(), name: 'Dimych' },
+        { id: v1(), name: 'Andrey' },
+        { id: v1(), name: 'Sveta' },
+        { id: v1(), name: 'Sasha' },
+        { id: v1(), name: 'Viktor' },
+        { id: v1(), name: 'Valera' },
     ],
     newMessage:'',
     messagesData: [
-        { id: 1, message: 'Hi' },
-        { id: 2, message: 'How is your it-kamasutra' },
-        { id: 3, message: 'Yo' }
+        { id: v1(), message: 'Hi' },
+        { id: v1(), message: 'How is your it-kamasutra' },
+        { id: v1(), message: 'Yo' }
     ]
 }
 const dialogsReducer=(state=initialState,action:ActionTypes)=>{
     switch(action.type){
         case 'ADD-MESSAGE':
-            const newMassage={id:6, message:state.newMessage}
-            state.messagesData.push(newMassage)
-            state.newMessage=''
-            return state
+            const newMassage={id:v1(), message:state.newMessage}
+            return {
+                ...state,
+                messagesData: [...state.messagesData, newMassage],
+                newMessage: ''
+            }
         case 'UPDATE-NEW-MESSAGE-TEXT':
-            state.newMessage=action.newText
-            return state
+            return {...state, newMessage: action.newText }
         default:
             return state
     }

@@ -1,17 +1,18 @@
+import { v1 } from "uuid"
 import dialogsReducer, { addMessageActionCreator, updateNewMessageActionCreator } from "./dialogs-reducer"
 import profileReducer, { addPostActionCreator, updateNewPostTextActionCreator } from "./profile-reducer"
 import sidebarReducer from "./sidebar-reducer"
 
 export type MessagesDataType = {
-    id?: number
+    id?: string
     message: string
 }
 export type DialogsDataType = {
-    id: number
+    id: string
     name: string
 }
 export type PostDataType = {
-    id?: number
+    id?: string
     message: string
     likeCounts: number
 }
@@ -46,24 +47,24 @@ let store:StoreType ={
         profilePage: {
             newPostText:'Hello',
             postData: [
-                { id: 1, message: 'Hi, how are you?', likeCounts: 12 },
-                { id: 2, message: "It's my first post", likeCounts: 11 },
+                { id: v1(), message: 'Hi, how are you?', likeCounts: 12 },
+                { id: v1(), message: "It's my first post", likeCounts: 11 },
             ]
         },
         dialogsPage: {
             dialogsData: [
-                { id: 1, name: 'Dimych' },
-                { id: 2, name: 'Andrey' },
-                { id: 3, name: 'Sveta' },
-                { id: 4, name: 'Sasha' },
-                { id: 5, name: 'Viktor' },
-                { id: 6, name: 'Valera' },
+                { id: v1(), name: 'Dimych' },
+                { id: v1(), name: 'Andrey' },
+                { id: v1(), name: 'Sveta' },
+                { id: v1(), name: 'Sasha' },
+                { id: v1(), name: 'Viktor' },
+                { id: v1(), name: 'Valera' },
             ],
             newMessage:'',
             messagesData: [
-                { id: 1, message: 'Hi' },
-                { id: 2, message: 'How is your it-kamasutra' },
-                { id: 3, message: 'Yo' }
+                { id: v1(), message: 'Hi' },
+                { id: v1(), message: 'How is your it-kamasutra' },
+                { id: v1(), message: 'Yo' }
             ]
         },
         sidebar: {}

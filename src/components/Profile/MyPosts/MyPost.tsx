@@ -29,7 +29,7 @@ export const MyPost = (props:myPostPropsType) => {
         </div>
       </div>
       <div className={s.posts}>
-        {props.postdata.map(el=><Post message={el.message} likeCounts={el.likeCounts} />)}
+        {props.postdata.map(el=><Post key={el.id} message={el.message} likeCounts={el.likeCounts} />)}
       </div>
     </div >
   )

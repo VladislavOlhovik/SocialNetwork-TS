@@ -1,0 +1,17 @@
+.wrapper{
+    display: flex;
+    margin: 1%;
+}
+.usersPhoto{
+    width: 55px;
+    height: 55px;
+    border-radius: 40px;
+}
+.content{
+    display: flex;
+    width: 30%;
+    justify-content: space-around;
+    border: black solid 1px;
+    border-radius: 15px;
+    margin-left: 10px;
+}

@@ -19,10 +19,10 @@ const Dialogs = (props:dialogsPropsType) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {props.dialogsPage.dialogsData.map(el=><DialogItem name={el.name} id={el.id}/>)}
+                {props.dialogsPage.dialogsData.map(el=><DialogItem key={el.id} name={el.name} id={el.id}/>)}
             </div>
             <div className={s.messages}>
-                {props.dialogsPage.messagesData.map(el=><Message message={el.message}/>)}
+                {props.dialogsPage.messagesData.map(el=><Message key={el.id} message={el.message}/>)}
                 <textarea  onChange={onMessageChange} placeholder='Enter your message' value={props.dialogsPage.newMessage}></textarea>
                 <button onClick={addMessage}>sent</button>
             </div>
