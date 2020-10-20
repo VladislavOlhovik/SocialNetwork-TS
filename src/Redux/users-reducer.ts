@@ -1,9 +1,9 @@
 import { v1 } from "uuid"
 export type UsersType = {
     id: string 
-    photoUrl:string 
+    photos:{small:string} 
     followed: boolean 
-    fullName: string 
+    name: string 
     status: string 
     location: {city: string, country:string}
 }
