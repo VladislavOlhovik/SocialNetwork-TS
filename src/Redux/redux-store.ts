@@ -11,7 +11,7 @@ let reducers = combineReducers({
     usersPage:usersReducer
 })
 
-
+export type RootType = ReturnType<typeof reducers>
 let store = createStore(reducers)
 
 //@ts-ignore

@@ -1,33 +1,44 @@
-import Axios from 'axios';
 import React from 'react';
 import { UsersType } from '../../Redux/users-reducer';
 import styles from './Users.module.css'
 import userPhoto from '../../images/user.png'
+import { NavLink } from 'react-router-dom';
 type UsersPropsType = {
     users:UsersType[]
+    pageSize: number
+    currentPage:number
+    totalUsersCount:number
+    onPageChanged:(el:number)=>void
     follow:(userId:string)=>void
-    unfollow: (userId:string)=>void
-    setUsers: (users:UsersType[])=>void 
+    unfollow: (userId:string)=>void    
 }
-class Users extends React.Component<UsersPropsType>{
-    
-    componentDidMount(){
-        Axios.get('https://social-network.samuraijs.com/api/1.0/users?page=100').then(respons=>{
-        this.props.setUsers(respons.data.items)
-        })        
-    }
-    render(){    
+const Users = (props:UsersPropsType) => {    
+     
+       let pageCount = Math.ceil(props.totalUsersCount/props.pageSize)   
+       let pages = []
+       for (let i = 1; i <= pageCount; i++) {
+           pages.push(i)           
+       }
        return(
         <div>
+            <div>
+                {pages.map((el,i)=>{
+                    return <span onClick={()=>props.onPageChanged(el)}
+                                 key={i} 
+                                 className={props.currentPage===el?styles.selectedPage:styles.selected}>-{el}-</span>
+                })}
+            </div>
             {
-                this.props.users.map(el=><div key={el.id} className={styles.wrapper}>
+                props.users.map(el=><div key={el.id} className={styles.wrapper}>
                     <span>
                         <div>
-                            <img src={el.photos.small?el.photos.small:userPhoto} alt="users" className={styles.usersPhoto}/>
+                            <NavLink to={'/profile/'+el.id}>
+                                <img src={el.photos.small?el.photos.small:userPhoto} alt="users" className={styles.usersPhoto}/>
+                            </NavLink>
                         </div>
                         <div>
-                            {el.followed?<button onClick={()=>this.props.unfollow(el.id)}>Unfollow</button>
-                            :<button onClick={()=>this.props.follow(el.id)}>Follow</button>}
+                            {el.followed?<button onClick={()=>props.unfollow(el.id)}>Unfollow</button>
+                            :<button onClick={()=>props.follow(el.id)}>Follow</button>}
                         </div>
                     </span>
                     <span className={styles.content}>
@@ -45,5 +56,5 @@ class Users extends React.Component<UsersPropsType>{
         </div>
     )
 }
-}
+
 export default Users

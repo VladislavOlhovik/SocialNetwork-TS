@@ -1,4 +1,3 @@
-import { v1 } from "uuid"
 export type UsersType = {
     id: string 
     photos:{small:string} 
@@ -9,11 +8,25 @@ export type UsersType = {
 }
 export type UsersPageType={
     users:Array<UsersType>
+    pageSize:number
+    totalUsersCount:number
+    currentPage:number
+    isFetching:boolean
 }
-export type ActionType = ReturnType<typeof followAC>|ReturnType<typeof unFollowAC>|ReturnType<typeof setUsersAC>
+export type ActionType = ReturnType<typeof follow>
+|ReturnType<typeof unFollow>
+|ReturnType<typeof setUsers>
+|ReturnType<typeof setCurrentPage>
+|ReturnType<typeof setTotalUsersCount>
+|ReturnType<typeof toggleIsFetching>
 
 const initialState:UsersPageType = {
-    users:[]}
+    users:[],
+    pageSize:15,
+    totalUsersCount:0,
+    currentPage:1,
+    isFetching:false,
+  }
 
 const usersReducer=(state=initialState,action:ActionType)=>{
     switch (action.type) {
@@ -38,12 +51,22 @@ const usersReducer=(state=initialState,action:ActionType)=>{
             })
           }
         case 'SET_USERS':
-          return {...state, users:[...state.users, ...action.users]} 
+          return {...state, users:action.users} 
+        case 'SET_CURRENT_PAGE':
+          return {...state, currentPage:action.pageNumber} 
+        case 'SET_TOTAL_USERS_COUNT':
+          return {...state, totalUsersCount:action.totalUsersCount} 
+        case 'TOGGLE_IS_FETCHING':
+          return {...state, isFetching:action.isFetching} 
         default:
           return state;
       }
 }
-export const followAC = (userId:string) => ({ type: 'FOLLOW', userId }as const);
-export const unFollowAC = (userId:string) => ({type:'UNFOLLOW', userId}as const);
-export const setUsersAC = (users:UsersType[]) => ({type: 'SET_USERS', users}as const);
+export const follow = (userId:string) => ({ type: 'FOLLOW', userId }as const);
+export const unFollow = (userId:string) => ({type:'UNFOLLOW', userId}as const);
+export const setUsers = (users:UsersType[]) => ({type: 'SET_USERS', users}as const);
+export const setCurrentPage = (pageNumber:number) => ({type: 'SET_CURRENT_PAGE', pageNumber}as const);
+export const setTotalUsersCount = (totalUsersCount:number) => ({type: 'SET_TOTAL_USERS_COUNT', totalUsersCount}as const);
+export const toggleIsFetching = (isFetching:boolean) => ({type: 'TOGGLE_IS_FETCHING', isFetching}as const);
+
 export default usersReducer

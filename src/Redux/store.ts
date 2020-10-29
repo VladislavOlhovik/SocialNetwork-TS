@@ -1,6 +1,7 @@
+import { Profile } from './../components/Profile/Profile';
 import { v1 } from "uuid"
 import dialogsReducer, { addMessageActionCreator, updateNewMessageActionCreator } from "./dialogs-reducer"
-import profileReducer, { addPostActionCreator, updateNewPostTextActionCreator } from "./profile-reducer"
+import profileReducer, { addPostActionCreator, setUserProfile, updateNewPostTextActionCreator } from "./profile-reducer"
 import sidebarReducer from "./sidebar-reducer"
 
 export type MessagesDataType = {
@@ -24,7 +25,20 @@ export type DialogsPageType = {
 export type ProfilePageType = {
     newPostText:string
     postData: Array<PostDataType>
+    profile:any
 }
+// export type ProfileDataType = {
+//     aboutMe:string
+//     contacts:{}
+//     lookingForAJob:boolean
+//     lookingForAJobDescription:string
+//     fullName:string
+//     userId:number
+//     photos:{
+//         small:string
+//         large:string
+//     }
+// }
 export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
@@ -33,7 +47,7 @@ export type RootStateType = {
 export type SidebarType={}
 export type ActionTypes = ReturnType<typeof addMessageActionCreator> |
 ReturnType<typeof updateNewMessageActionCreator>|ReturnType<typeof addPostActionCreator>|
-ReturnType<typeof updateNewPostTextActionCreator>
+ReturnType<typeof updateNewPostTextActionCreator>|ReturnType<typeof setUserProfile>
 export type StoreType={
     _state:RootStateType
     getState:()=>RootStateType
@@ -49,7 +63,9 @@ let store:StoreType ={
             postData: [
                 { id: v1(), message: 'Hi, how are you?', likeCounts: 12 },
                 { id: v1(), message: "It's my first post", likeCounts: 11 },
-            ]
+            ],
+            profile:null,
+
         },
         dialogsPage: {
             dialogsData: [
