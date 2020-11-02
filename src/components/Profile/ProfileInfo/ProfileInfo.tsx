@@ -13,7 +13,7 @@ export const ProfileInfo = (props:ProfilePropsType) => {
   return (
     <div>
       <div>
-        <img className={s.img} src="https://gadgetmedics.com/wp-content/uploads/2020/01/illustration-geiranger.jpg" />
+        <img className={s.img} src="https://gadgetmedics.com/wp-content/uploads/2020/01/illustration-geiranger.jpg" alt='img'/>
       </div>
       <div className={s.descriptionBlock}>
         <div className={s.wrapper}>

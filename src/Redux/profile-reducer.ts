@@ -1,6 +1,18 @@
 import { v1 } from "uuid"
-import { ActionTypes, PostDataType, ProfilePageType } from "./store"
-
+export type ProfileActionType = 
+ReturnType<typeof addPostActionCreator>|
+ReturnType<typeof updateNewPostTextActionCreator>|
+ReturnType<typeof setUserProfile>
+type ProfilePageType = {
+    newPostText:string
+    postData: Array<PostDataType>
+    profile:any
+}
+export type PostDataType = {
+    id?: string
+    message: string
+    likeCounts: number
+}
 const initialState:ProfilePageType = {
     newPostText:'Hello!',
     postData: [
@@ -9,7 +21,7 @@ const initialState:ProfilePageType = {
     ],
     profile:null,
 }
-const profileReducer=(state=initialState,action:ActionTypes)=>{
+const profileReducer=(state=initialState,action:ProfileActionType)=>{
     switch(action.type){
         case 'ADD-POST':
             const newPost:PostDataType={

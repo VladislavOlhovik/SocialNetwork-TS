@@ -1,6 +1,20 @@
 import { v1 } from "uuid"
-import { ActionTypes, DialogsPageType } from "./store"
-
+export type DialogsPageType = {
+    dialogsData: Array<DialogsDataType>
+    messagesData: Array<MessagesDataType>
+    newMessage:string
+}
+export type DialogsDataType = {
+    id: string
+    name: string
+}
+export type MessagesDataType = {
+    id?: string
+    message: string
+}
+export type DialogsActionType = 
+ReturnType<typeof addMessageActionCreator> |
+ReturnType<typeof updateNewMessageActionCreator>
 const initialState:DialogsPageType = {
     dialogsData: [
         { id: v1(), name: 'Dimych' },
@@ -17,7 +31,7 @@ const initialState:DialogsPageType = {
         { id: v1(), message: 'Yo' }
     ]
 }
-const dialogsReducer=(state=initialState,action:ActionTypes)=>{
+const dialogsReducer=(state=initialState,action:DialogsActionType)=>{
     switch(action.type){
         case 'ADD-MESSAGE':
             const newMassage={id:v1(), message:state.newMessage}

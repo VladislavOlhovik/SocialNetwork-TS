@@ -1,15 +1,15 @@
-import React from 'react';
 import Dialogs from './Dialogs'
 import { addMessageActionCreator, updateNewMessageActionCreator } from '../../Redux/dialogs-reducer';
 import { connect } from 'react-redux';
-import { ActionTypes, RootStateType } from '../../Redux/store';
+import { DialogsActionType } from '../../Redux/dialogs-reducer';
+import { RootType } from '../../Redux/redux-store';
 
-const mapStateToProps = (state:RootStateType)=>{
+const mapStateToProps = (state:RootType)=>{
     return{
         dialogsPage: state.dialogsPage
     }
 }
-const mapDispatchToProps = (dispatch:(action:ActionTypes)=>void)=>{
+const mapDispatchToProps = (dispatch:(action:DialogsActionType)=>void)=>{
     return{
         updateNewMessage: (e:string)=>dispatch(updateNewMessageActionCreator(e)),
         addMessage: ()=>dispatch(addMessageActionCreator())
