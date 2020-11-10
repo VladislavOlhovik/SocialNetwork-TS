@@ -1,4 +1,6 @@
+import { profileAPI } from './../api/api';
 import { v1 } from "uuid"
+
 export type ProfileActionType = 
 ReturnType<typeof addPostActionCreator>|
 ReturnType<typeof updateNewPostTextActionCreator>|
@@ -48,4 +50,12 @@ export const updateNewPostTextActionCreator = (newText:string) => ({
   type: 'UPDATE-NEW-POST-TEXT',
   newText: newText
 }as const);
+
+export const getUserProfile = (userId: string) => (dispatch: (action: ProfileActionType) => void) => {
+    profileAPI.getUser(userId)
+        .then(respons => {
+            dispatch(setUserProfile(respons.data))
+        })
+}
+
 export default profileReducer
