@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { RootType } from '../../Redux/redux-store';
 import { follow, getUsers, getUsersCurrentPage, unFollow, UsersType } from '../../Redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/preloader/Preloader';
+import { compose } from 'redux';
+import { WithAuthRedirect } from '../../hoc/WithAuthRedirect';
 
 type UsersContainerPropsType = {
     users:UsersType[]
@@ -59,9 +61,12 @@ const mapStateToProps = (state:RootType) =>{
     }
 }
 
-export default connect(mapStateToProps,{
+export default compose<ComponentType>(
+  connect(mapStateToProps, {
     follow,
     unFollow,
     getUsers,
     getUsersCurrentPage,
-})(UsersContainer)
+  }),
+  WithAuthRedirect
+)(UsersContainer);
