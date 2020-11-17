@@ -3,6 +3,7 @@ import Preloader from '../../common/preloader/Preloader';
 import { ProfilePropsType } from '../Profile';
 import s from './ProfileInfo.module.css';
 import userPhoto from '../../../images/user.png'
+import ProfileStatus from './ProfileStatus';
 
 
 
@@ -12,9 +13,9 @@ export const ProfileInfo = (props:ProfilePropsType) => {
   }
   return (
     <div>
-      <div>
+      {/* <div>
         <img className={s.img} src="https://gadgetmedics.com/wp-content/uploads/2020/01/illustration-geiranger.jpg" alt='img'/>
-      </div>
+      </div> */}
       <div className={s.descriptionBlock}>
         <div className={s.wrapper}>
           <span>
@@ -29,6 +30,7 @@ export const ProfileInfo = (props:ProfilePropsType) => {
             </span>
           </span>
         </div>
+        <ProfileStatus status = {'Hello my friends'}/>
       </div>
     </div>
   )
