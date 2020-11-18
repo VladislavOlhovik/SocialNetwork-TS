@@ -20,7 +20,7 @@ export const ProfileInfo = (props:ProfilePropsType) => {
         <div className={s.wrapper}>
           <span>
             <div>
-              <img src={props.profile.photos.small ? props.profile.photos.small : userPhoto} alt="users" className={s.usersPhoto} />
+              <img src={props.profile.photos.large ? props.profile.photos.large : userPhoto} alt="users" className={s.usersPhoto} />
             </div>
           </span>
           <span className={s.content}>
