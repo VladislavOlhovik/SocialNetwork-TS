@@ -1,5 +1,5 @@
 import Dialogs from './Dialogs'
-import { addMessageActionCreator, updateNewMessageActionCreator } from '../../Redux/dialogs-reducer';
+import { addMessageActionCreator } from '../../Redux/dialogs-reducer';
 import { connect } from 'react-redux';
 import { DialogsActionType } from '../../Redux/dialogs-reducer';
 import { RootType } from '../../Redux/redux-store';
@@ -14,8 +14,7 @@ const mapStateToProps = (state:RootType)=>{
 }
 const mapDispatchToProps = (dispatch:(action:DialogsActionType)=>void)=>{
     return{
-        updateNewMessage: (e:string)=>dispatch(updateNewMessageActionCreator(e)),
-        addMessage: ()=>dispatch(addMessageActionCreator())
+        addMessage: (newMessage: string)=>dispatch(addMessageActionCreator(newMessage)),
     }
 }
 

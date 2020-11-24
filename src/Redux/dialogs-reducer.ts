@@ -2,7 +2,6 @@ import { v1 } from "uuid"
 export type DialogsPageType = {
     dialogsData: Array<DialogsDataType>
     messagesData: Array<MessagesDataType>
-    newMessage:string
 }
 export type DialogsDataType = {
     id: string
@@ -13,8 +12,8 @@ export type MessagesDataType = {
     message: string
 }
 export type DialogsActionType = 
-ReturnType<typeof addMessageActionCreator> |
-ReturnType<typeof updateNewMessageActionCreator>
+ReturnType<typeof addMessageActionCreator>
+
 const initialState:DialogsPageType = {
     dialogsData: [
         { id: v1(), name: 'Dimych' },
@@ -24,7 +23,6 @@ const initialState:DialogsPageType = {
         { id: v1(), name: 'Viktor' },
         { id: v1(), name: 'Valera' },
     ],
-    newMessage:'',
     messagesData: [
         { id: v1(), message: 'Hi' },
         { id: v1(), message: 'How is your it-kamasutra' },
@@ -34,22 +32,16 @@ const initialState:DialogsPageType = {
 const dialogsReducer=(state=initialState,action:DialogsActionType)=>{
     switch(action.type){
         case 'ADD-MESSAGE':
-            const newMassage={id:v1(), message:state.newMessage}
+            const newMassage={id:v1(), message:action.newMessage}
             return {
                 ...state,
                 messagesData: [...state.messagesData, newMassage],
                 newMessage: ''
             }
-        case 'UPDATE-NEW-MESSAGE-TEXT':
-            return {...state, newMessage: action.newText }
         default:
             return state
     }
 }
-export const addMessageActionCreator = () => ({
-     type: 'ADD-MESSAGE'}as const);
-export const updateNewMessageActionCreator = (newText:string) => ({
-  type: 'UPDATE-NEW-MESSAGE-TEXT',
-  newText: newText
-}as const);
+export const addMessageActionCreator = (newMessage: string) => ({
+     type: 'ADD-MESSAGE', newMessage }as const);
 export default dialogsReducer

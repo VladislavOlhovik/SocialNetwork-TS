@@ -3,11 +3,9 @@ import { v1 } from "uuid"
 
 export type ProfileActionType = 
 ReturnType<typeof addPostActionCreator>|
-ReturnType<typeof updateNewPostTextActionCreator>|
 ReturnType<typeof setUserProfile>|
 ReturnType<typeof setStatus>
 type ProfilePageType = {
-    newPostText:string
     postData: Array<PostDataType>
     profile:any
     status:string
@@ -18,7 +16,6 @@ export type PostDataType = {
     likeCounts: number
 }
 const initialState:ProfilePageType = {
-    newPostText:'Hello!',
     postData: [
         { id: v1(), message: 'Hi, how are you?', likeCounts: 12 },
         { id: v1(), message: "It's my first post", likeCounts: 11 },
@@ -31,16 +28,13 @@ const profileReducer=(state=initialState,action:ProfileActionType)=>{
         case 'ADD-POST':
             const newPost:PostDataType={
                 id:v1(),
-                message:state.newPostText,
+                message:action.newPostText,
                 likeCounts:0    
             }
             return {
                 ...state,
-                postData: [newPost, ...state.postData],
-                newPostText: ''
+                postData: [newPost, ...state.postData]
             }
-        case 'UPDATE-NEW-POST-TEXT':
-            return {...state, newPostText: action.newText}
         case 'SET_USER_PROFILE':
             return {...state, profile: action.profile}
         case 'SET_STATUS':
@@ -49,13 +43,9 @@ const profileReducer=(state=initialState,action:ProfileActionType)=>{
             return state
     }
 }
-export const addPostActionCreator = () => ({ type: 'ADD-POST' } as const);
+export const addPostActionCreator = (newPostText: string) => ({ type: 'ADD-POST', newPostText } as const);
 export const setUserProfile = (profile:any) => ({ type: 'SET_USER_PROFILE', profile } as const);
 export const setStatus = (status:string) => ({ type: 'SET_STATUS', status } as const);
-export const updateNewPostTextActionCreator = (newText:string) => ({
-  type: 'UPDATE-NEW-POST-TEXT',
-  newText: newText
-}as const);
 
 export const getUserProfile = (userId: string) => (dispatch: (action: ProfileActionType) => void) => {
     profileAPI.getProfile(userId)
