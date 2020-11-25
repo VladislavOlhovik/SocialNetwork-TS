@@ -1,17 +1,25 @@
 import React from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+import { require } from '../../utils/validadors'
+import { Input } from '../common/FormsControls/FormsControls'
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Login'} name={'login'} component={'input'} />
+                <Field placeholder={'Login'}
+                       name={'login'}
+                       validate={[require]}
+                       component={Input} />
             </div>
             <div>
-                <Field placeholder={'Password'} name={'password'} component={'input'}/>
+                <Field placeholder={'Password'} 
+                       name={'password'} 
+                       validate={[require]}
+                       component={Input}/>
             </div>
             <div>
-                <Field type={'checkbox'} name={'rememberMe'} component={'input'}/>remember me
+                <Field type={'checkbox'} name={'rememberMe'} component={Input}/>remember me
             </div>
             <div>
                 <button>Login</button>
