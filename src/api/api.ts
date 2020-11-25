@@ -38,9 +38,36 @@ export const profileAPI = {
     },
 }
 
+export enum ResultCodeEnum {
+    Success = 0,
+    Error = 1,
+    captchIsReqired = 10 
+}
+type MeDataType = {
+    id: number,
+    login: string,
+    email: string
+}
+type ResponsType<T> = {
+    data: T
+    messages: string[]
+    resultCode: ResultCodeEnum
+}
+
 export const authAPI = {
     getMe () {
-        return instance.get(`auth/me`)
+        return instance.get<ResponsType<MeDataType>>(`auth/me`)
         .then(respons=>respons.data)
+    },
+    login (email: string, password: string, rememberMe: boolean) {
+        return instance.post<ResponsType<{userId: number}>>(`auth/login`, {
+          email,
+          password,
+          rememberMe
+        }).then(res=>res.data)
+    },
+    logout () {
+        return instance.post(`auth/logout`)
+        .then(res=>res.data)
     }
 }
