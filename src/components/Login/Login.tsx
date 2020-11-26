@@ -6,6 +6,8 @@ import { Input } from '../common/FormsControls/FormsControls'
 import { login } from '../../Redux/auth-reducer'
 import { RootType } from '../../Redux/redux-store'
 import { Redirect } from 'react-router-dom'
+import style from '../common/FormsControls/FormsControls.module.css'
+
 
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
@@ -21,6 +23,9 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                        name={'password'} 
                        validate={[require]}
                        component={Input}/>
+            </div>
+            <div className={props.error?style.formError:''}>
+                {props.error}
             </div>
             <div>
                 <Field type={'checkbox'} name={'rememberMe'} component={Input}/>remember me
