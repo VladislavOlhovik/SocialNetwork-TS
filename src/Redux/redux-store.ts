@@ -6,6 +6,7 @@ import profileReducer from './profile-reducer';
 import sidebarReducer from './sidebar-reducer';
 import usersReducer from './users-reducer';
 import { reducer as formReducer } from 'redux-form'
+import appReducer from './app-reducer';
 
 
 let reducers = combineReducers({
@@ -15,6 +16,7 @@ let reducers = combineReducers({
     usersPage:usersReducer,
     auth:authReducer,
     form: formReducer,
+    app: appReducer,
 })
 
 export type RootType = ReturnType<typeof reducers>

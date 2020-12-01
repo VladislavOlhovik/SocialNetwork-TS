@@ -68,5 +68,4 @@ export default compose<ComponentType>(
     getUsers,
     getUsersCurrentPage,
   }),
-  WithAuthRedirect
 )(UsersContainer);
