@@ -3,7 +3,7 @@ import Preloader from '../../common/preloader/Preloader';
 import { ProfilePropsType } from '../Profile';
 import s from './ProfileInfo.module.css';
 import userPhoto from '../../../images/user.png'
-import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHook from './ProfileStatusWithHook';
 
 
 
@@ -30,7 +30,7 @@ export const ProfileInfo = (props:ProfilePropsType) => {
             </span>
           </span>
         </div>
-        <ProfileStatus status = {props.status} updateUserStatus = {props.updateUserStatus}/>
+        <ProfileStatusWithHook status = {props.status} updateUserStatus = {props.updateUserStatus}/>
       </div>
     </div>
   )
