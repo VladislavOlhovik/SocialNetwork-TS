@@ -55,9 +55,9 @@ const Chat = () => {
             <div className={s.messages} ref={messagesBlockRef}>
                 {messages.map((m, i) => {
                     return (
-                        <div key={i} className={`${s.wrapper} ${userID?s.myMessage:''}`}>
+                        <div key={i} className={`${s.wrapper} ${userID===+m.userId?s.myMessage:''}`}>
                             <img src={m.photo?m.photo:userPhoto} alt="avatar" />
-                            <div className={`${userID?s.mySpeechbubble:s.speechbubble}`}>
+                            <div className={`${userID===+m.userId?s.mySpeechbubble:s.speechbubble}`}>
                                 <div className={s.name}>
                                     <div>{m.userName}</div>
                                 </div>
