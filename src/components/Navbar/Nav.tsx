@@ -13,6 +13,9 @@ export const Nav = () => {
         <NavLink to='/dialogs' activeClassName={s.active}>Messages</NavLink>
       </div>
       <div className={s.item}>
+        <NavLink to='/chat' activeClassName={s.active}>Chat</NavLink>
+      </div>
+      <div className={s.item}>
         <NavLink to='/news' activeClassName={s.active}>News</NavLink>
       </div>
       <div className={s.item}>

@@ -1,0 +1,83 @@
+.wrapper{
+    display: flex;
+    margin: 5px;
+}
+.wrapper img{
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+    border: solid 1px black;
+}
+.wrapper .name{
+    color: blueviolet;
+    display: flex;
+    justify-content: space-between;
+}
+.wrapper .message{
+    font-style: italic;
+}
+.speechbubble {
+	position: relative;
+	background: #eef8f8;
+    border-radius: .4em;
+    padding: 0 1% 0 1%;
+    margin-left: 18px;
+}
+.speechbubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 15px solid transparent;
+	border-right-color:#eef8f8;
+	border-left: 0;
+	border-top: 0;
+	margin-top: -7.5px;
+	margin-left: -15px;
+}
+.name .time{
+    color: darkgrey;
+    opacity: 0,8;
+}
+.header {
+    padding-left: 15em;
+}
+.inputss{
+    margin-left: 5em;
+}
+.inputss input{
+    width: 40%;
+}
+.messages{
+    height: 400px;
+    overflow-y: scroll;
+    max-width: 600px;
+}
+
+
+.myMessage{
+    flex-direction: row-reverse;
+}
+.mySpeechbubble {
+    position: relative;
+	background: #eef8f8;
+    border-radius: .4em;
+    padding: 0 1% 0 1%;
+    margin-right: 18px;
+}
+.mySpeechbubble:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 15px solid transparent;
+	border-left-color: #eef8f8;
+	border-right: 0;
+	border-top: 0;
+	margin-top: -7.5px;
+	margin-right: -15px;
+}
