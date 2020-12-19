@@ -1,5 +1,5 @@
 
-type ValidatorsType = (value: string)=>string | undefined
+export type ValidatorsType = (value: string)=>string | undefined
 
 export const require:ValidatorsType = (value) => {
     if(value) return undefined
