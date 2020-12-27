@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react'
 
 type ProfileStatusPropsType = {
   status: string
-  updateUserStatus:(status:string)=>void
+  updateUserStatus?:(status:string)=>void
 }
 type StateType = {
   editMode: boolean
@@ -19,7 +19,7 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType, StateType> {
   } 
   deactivateEditMode = () => {
    this.setState({editMode:false})
-   this.props.updateUserStatus(this.state.status)
+   this.props.updateUserStatus&&this.props.updateUserStatus(this.state.status)
   } 
   onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({status:e.currentTarget.value})
