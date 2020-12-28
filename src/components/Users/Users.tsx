@@ -2,6 +2,8 @@ import React from "react";
 import { UsersType } from "../../Redux/users-reducer";
 import User from "./User";
 import Paginator from "../common/Paginator/Paginator";
+import styles from "./Users.module.css";
+
 
 type UsersPropsType = {
   users: UsersType[];
@@ -25,12 +27,15 @@ const Users = ({
 }: UsersPropsType) => {
   return (
     <div>
-      <Paginator
-        currentPage={currentPage}
-        onPageChanged={onPageChanged}
-        pageSize={pageSize}
-        totalUsersCount={totalUsersCount}
-      />
+      <div className={styles.paginator}>
+        <Paginator
+          portionSize={20}
+          currentPage={currentPage}
+          onPageChanged={onPageChanged}
+          pageSize={pageSize}
+          totalItemsCount={totalUsersCount}
+        />
+      </div>
       {users.map((el) => (
         <User
           key={el.id}
