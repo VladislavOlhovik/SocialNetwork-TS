@@ -5,7 +5,6 @@ import { Route } from 'react-router-dom';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Setting from './components/Setting/Setting';
-import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -16,6 +15,8 @@ import { initializeApp } from './Redux/app-reducer';
 import { RootType } from './Redux/redux-store'
 import Preloader from './components/common/preloader/Preloader';
 import Chat from './components/Chat/Chat';
+import WithSuspense from './hoc/WithSuspense';
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 type AppPropsType = {
   initializeApp: () => void
@@ -36,7 +37,7 @@ class App extends React.Component<AppPropsType> {
         <Nav />
         <div className="app-wrapper-content">
           <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
-          <Route path="/dialogs" render={() => <DialogsContainer />} />
+          <Route path="/dialogs" render={WithSuspense(DialogsContainer)} />
           <Route path="/users" render={() => <UsersContainer />} />
           <Route path="/login" render={() => <Login />} />
           <Route path="/chat" render={() => <Chat />} />
