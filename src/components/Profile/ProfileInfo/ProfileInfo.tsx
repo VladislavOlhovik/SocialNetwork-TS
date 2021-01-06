@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import Preloader from '../../common/preloader/Preloader';
 import { ProfilePropsType } from '../Profile';
 import s from './ProfileInfo.module.css';
@@ -8,20 +8,23 @@ import ProfileStatusWithHook from './ProfileStatusWithHook';
 
 
 export const ProfileInfo = (props:ProfilePropsType) => {
+  const sendFile = (e: ChangeEvent<HTMLInputElement>) => {
+    if(e.target.files){
+      props.savePhoto(e.target.files[0])
+    }
+  }
   if(!props.profile){
     return <Preloader/>
   }
   return (
     <div>
-      {/* <div>
-        <img className={s.img} src="https://gadgetmedics.com/wp-content/uploads/2020/01/illustration-geiranger.jpg" alt='img'/>
-      </div> */}
       <div className={s.descriptionBlock}>
         <div className={s.wrapper}>
           <span>
             <div>
-              <img src={props.profile.photos.large ? props.profile.photos.large : userPhoto} alt="users" className={s.usersPhoto} />
+              <img src={props.profile.photos.large || userPhoto} alt="users" className={s.usersPhoto} />
             </div>
+            {props.isOwner && <input type='file' onChange={sendFile}/>}
           </span>
           <span className={s.content}>
             <span>
@@ -30,7 +33,7 @@ export const ProfileInfo = (props:ProfilePropsType) => {
             </span>
           </span>
         </div>
-        <ProfileStatusWithHook status = {props.status} updateUserStatus = {props.updateUserStatus}/>
+        <ProfileStatusWithHook isOwner={props.isOwner} status = {props.status} updateUserStatus = {props.updateUserStatus}/>
       </div>
     </div>
   )

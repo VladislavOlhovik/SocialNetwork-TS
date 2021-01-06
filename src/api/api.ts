@@ -36,6 +36,13 @@ export const profileAPI = {
     updateStatus (status: string) {
         return instance.put(`profile/status`,{status})
     },
+    updatePhotos (file: File) {
+        let data = new FormData()
+        data.append('file', file)
+        return instance.put(`profile/photo`, data, {headers: {
+            'Content-Type': 'multipart/form-data',
+        }})
+    },
 }
 
 export enum ResultCodeEnum {

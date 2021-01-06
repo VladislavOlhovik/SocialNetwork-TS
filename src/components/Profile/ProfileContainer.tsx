@@ -2,7 +2,7 @@ import React, { ComponentType } from 'react';
 import { Profile } from './Profile';
 import { connect } from 'react-redux';
 import { RootType } from '../../Redux/redux-store';
-import {getUserProfile, getUserStatus, updateUserStatus} from '../../Redux/profile-reducer'
+import {getUserProfile, getUserStatus, updateUserStatus, savePhoto} from '../../Redux/profile-reducer'
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 
@@ -13,11 +13,12 @@ type ProfileContainerProps={
   profile:any
   userID:string
   status:string
+  savePhoto:(file:File)=>void
 }
 type PropsType = RouteComponentProps<{userId:string}>&ProfileContainerProps
 
 class ProfileContainer extends React.Component<PropsType> {
-  componentDidMount() {
+  refreshProfile(){
     let userId = this.props.match.params.userId;
     if (!userId) {
       userId = this.props.userID;
@@ -28,10 +29,20 @@ class ProfileContainer extends React.Component<PropsType> {
     this.props.getUserStatus(userId);
     this.props.getUserProfile(userId);
   }
+  componentDidMount() {
+    this.refreshProfile()
+  }
+  componentDidUpdate(prevProps: PropsType){
+    if(this.props.match.params.userId!==prevProps.match.params.userId){
+      this.refreshProfile()
+    }
+  }
   render() {
     return (
       <div>
         <Profile profile={this.props.profile}
+                 isOwner={!this.props.match.params.userId}
+                 savePhoto={this.props.savePhoto}
                  status = {this.props.status}
                  updateUserStatus = {this.props.updateUserStatus} />
       </div>
@@ -47,6 +58,6 @@ const mapStateToProps = (state:RootType) => {
 }
 
 export default compose<ComponentType>(
-  connect(mapStateToProps,{getUserProfile, getUserStatus, updateUserStatus}),
+  connect(mapStateToProps,{getUserProfile, getUserStatus, updateUserStatus, savePhoto }),
   withRouter
 )(ProfileContainer) 
