@@ -1,5 +1,9 @@
 import { profileAPI } from './../api/api';
 import { v1 } from "uuid"
+import { ProfileDataFormType } from '../components/Profile/ProfileInfo/ProfileDataForm';
+import { RootType } from './redux-store';
+import { Dispatch } from 'react';
+import { stopSubmit } from 'redux-form';
 
 export type ProfileActionType = 
 ReturnType<typeof addPostActionCreator>|
@@ -69,6 +73,18 @@ export const savePhoto = (file: File) => async (dispatch: (action: ProfileAction
     let respons = await profileAPI.updatePhotos(file)
     if(respons.data.resultCode===0){
         dispatch(setPhoto(respons.data.data.photos))
+    }
+}
+export const saveProfile = (formData: ProfileDataFormType) => async (dispatch: Dispatch<any>, getState:()=>RootType) => {
+    const userId = getState().auth.id
+    let respons = await profileAPI.updateProfile(formData)
+    if(respons.data.resultCode===0){
+        userId && dispatch(getUserProfile(String(userId)))
+    } else {
+        let message =
+            respons.data.messages.length > 0 ? respons.data.messages[0] : "Some error";
+        dispatch(stopSubmit("profileEdit", { _error: message }));
+        return Promise.reject()
     }
 }
 

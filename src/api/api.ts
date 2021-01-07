@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { ProfileDataFormType } from "../components/Profile/ProfileInfo/ProfileDataForm";
 
 const instance = Axios.create({
     withCredentials: true,
@@ -35,6 +36,9 @@ export const profileAPI = {
     },
     updateStatus (status: string) {
         return instance.put(`profile/status`,{status})
+    },
+    updateProfile (formData:ProfileDataFormType) {
+        return instance.put(`profile`, formData)
     },
     updatePhotos (file: File) {
         let data = new FormData()
