@@ -2,7 +2,7 @@ import { profileAPI } from './../api/api';
 import { v1 } from "uuid"
 import { ProfileDataFormType } from '../components/Profile/ProfileInfo/ProfileDataForm';
 import { RootType } from './redux-store';
-import { Dispatch } from 'react';
+import { Dispatch } from 'redux';
 import { stopSubmit } from 'redux-form';
 
 export type ProfileActionType = 
@@ -55,21 +55,21 @@ export const setUserProfile = (profile:any) => ({ type: 'profile/SET_USER_PROFIL
 export const setStatus = (status:string) => ({ type: 'profile/SET_STATUS', status } as const);
 export const setPhoto = (photos:{large:string, small:string}) => ({ type: 'profile/SET_PHOTOS', photos } as const);
 
-export const getUserProfile = (userId: string) => async (dispatch: (action: ProfileActionType) => void) => {
+export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
     let respons = await profileAPI.getProfile(userId)
     dispatch(setUserProfile(respons.data))
 }
-export const getUserStatus = (userId: string) => async (dispatch: (action: ProfileActionType) => void) => {
+export const getUserStatus = (userId: string) => async (dispatch: Dispatch) => {
     let respons = await profileAPI.getStatus(userId)
     dispatch(setStatus(respons.data))
 }
-export const updateUserStatus = (status: string) => async (dispatch: (action: ProfileActionType) => void) => {
+export const updateUserStatus = (status: string) => async (dispatch: Dispatch) => {
     let respons = await profileAPI.updateStatus(status)
     if(respons.data.resultCode===0){
         dispatch(setStatus(status))
     }
 }
-export const savePhoto = (file: File) => async (dispatch: (action: ProfileActionType) => void) => {
+export const savePhoto = (file: File) => async (dispatch: Dispatch) => {
     let respons = await profileAPI.updatePhotos(file)
     if(respons.data.resultCode===0){
         dispatch(setPhoto(respons.data.data.photos))

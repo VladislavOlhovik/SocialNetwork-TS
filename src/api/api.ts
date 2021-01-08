@@ -27,6 +27,12 @@ export const followAPI = {
     },
 }
 
+export const securityAPI = {
+    getCaptchaUrl () {
+        return instance.get(`security/get-captcha-url`)
+    },
+}
+
 export const profileAPI = {
     getProfile (userId:string) {
         return instance.get(`profile/${userId}`)
@@ -70,11 +76,12 @@ export const authAPI = {
         return instance.get<ResponsType<MeDataType>>(`auth/me`)
         .then(respons=>respons.data)
     },
-    login (email: string, password: string, rememberMe: boolean) {
+    login (email: string, password: string, rememberMe: boolean, captcha: null|string = null) {
         return instance.post<ResponsType<{userId: number}>>(`auth/login`, {
           email,
           password,
-          rememberMe
+          rememberMe,
+          captcha,
         }).then(res=>res.data)
     },
     logout () {
