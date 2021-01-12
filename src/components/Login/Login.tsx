@@ -55,6 +55,12 @@ const Login = ({isAuth, login, captchaUrl }: LoginPropsType) => {
     if(isAuth) return <Redirect to={'/profile'}/>
     return (
       <div>
+        <span>
+            To log in get registeredhere
+            or use common test account credentials:
+            Email: free@samuraijs.com
+            Password: free
+        </span>
         <h1>Login</h1>
         <LogiReduxForm captchaUrl={captchaUrl} onSubmit={onSubmit}/>
       </div>

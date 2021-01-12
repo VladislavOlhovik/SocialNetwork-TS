@@ -6,6 +6,7 @@ import { useRef } from 'react'
 import userPhoto from '../../images/user.png'
 import { useSelector } from 'react-redux'
 import { RootType } from '../../Redux/redux-store'
+import { WithAuthRedirect } from '../../hoc/WithAuthRedirect'
 
 type MessagesType = {
     userId: string
@@ -75,4 +76,4 @@ const Chat = () => {
     )
 }
 
-export default Chat
+export default WithAuthRedirect(Chat)
