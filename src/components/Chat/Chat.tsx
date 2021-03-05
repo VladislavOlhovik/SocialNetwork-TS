@@ -23,11 +23,10 @@ const Chat = () => {
     const userID = useSelector<RootType, number | null>(state=>state.auth.id)
 
     useEffect(() => {
-        const socket = new WebSocket('wss://social-network.samuraijs.com/handlers/chatHandler.ashx')
-        setSocket(socket)
+        const webSocket = new WebSocket('wss://social-network.samuraijs.com/handlers/chatHandler.ashx')
+        setSocket(webSocket)
         return () => {
-            socket.onclose = function () {
-            }
+            webSocket.close()
         }
     }, [])
     if (socket) {
@@ -70,7 +69,7 @@ const Chat = () => {
             </div>
             <div className={s.inputss}>
                 <input value={message} onChange={onChangeHandler} />
-                <button onClick={sendMessage}>SEND</button>
+                <button disabled={socket === null} onClick={sendMessage}>SEND</button>
             </div>
         </div>
     )

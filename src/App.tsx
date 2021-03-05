@@ -14,9 +14,9 @@ import { connect } from 'react-redux';
 import { initializeApp } from './Redux/app-reducer';
 import { RootType } from './Redux/redux-store'
 import Preloader from './components/common/preloader/Preloader';
-import Chat from './components/Chat/Chat';
 import WithSuspense from './hoc/WithSuspense';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const Chat = React.lazy(() => import('./components/Chat/Chat'));
 
 type AppPropsType = {
   initializeApp: () => void
@@ -41,7 +41,7 @@ class App extends React.Component<AppPropsType> {
           <Route path="/dialogs" render={WithSuspense(DialogsContainer)} />
           <Route path="/users" render={() => <UsersContainer />} />
           <Route path="/login" render={() => <Login />} />
-          <Route path="/chat" render={() => <Chat />} />
+          <Route path="/chat" render={WithSuspense(Chat)} />
           <Route path="/news" component={News} />
           <Route path="/music" component={Music} />
           <Route path="/setting" component={Setting} />
